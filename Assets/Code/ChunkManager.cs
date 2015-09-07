@@ -10,6 +10,7 @@ public class ChunkManager : MonoBehaviour
 	//screen width in game unit
 	private float m_screenWidthGameUnits;
 	private bool removed = false;
+	public float difficulty;
 	
 	private List<GameObject> m_chunkClones = new List<GameObject>();
 	
@@ -20,6 +21,7 @@ public class ChunkManager : MonoBehaviour
 	
 	void Start()
 	{
+		difficulty = 0.5f;
 		for (int i = 0; i < 4; i++)
 		{
 			m_chunkClones.Add(getRandomChunk(Vector3.zero));
@@ -44,8 +46,8 @@ public class ChunkManager : MonoBehaviour
 	
 	void Update()
 	{
-		
 		//if(m_chunkClones[0] != null){
+		difficulty += 0.0001f;
 		if (removed) {
 			m_chunkClones.Add(getRandomChunk(Vector3.zero));
 			removed = false;
@@ -59,7 +61,7 @@ public class ChunkManager : MonoBehaviour
 				m_chunkClones.RemoveAt(i);
 				removed = true;
 			}
-			moveChunk(m_chunkClones[i], 1);
+			moveChunk(m_chunkClones[i], difficulty);
 		}
 		//}
 		//check of alle chunks nog binne scherm zijn
